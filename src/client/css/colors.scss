@@ -1,3 +1,24 @@
 :root {
-  --default-bg-color: #EBEFF3;
+  --black-color: #4D5167;
+  --red-color: #E43538;
+  --bright-blue-color: #4285F4;
+  --white-color: #fff;
+  --lightest-grey-color: #F6F6F5;
+  --lightest-blue-color: #EBEFF3;
+
+  --font-color: var(--black-color);
+  --font-error-color: var(--red-color);
+
+  --app-bg-color: var(--lightest-blue-color);
+  --container-grey-bg-color: var(--lightest-grey-color);
+  --currency-block-bg-color: var(--white-color);
+  --search-bg-color: var(--white-color);
+  --currency-indicator-bg-color: var(--lightest-grey-color);
+
+  --button-primary-bg-color: var(--bright-blue-color);
+  --button-danger-bg-color: var(--red-color);
+  --button-font-color: var(--white-color);
+  --button-swap-bg-color: var(--white-color);
+
+  --button-swap-font-hover-color: var(--bright-blue-color);
 }
