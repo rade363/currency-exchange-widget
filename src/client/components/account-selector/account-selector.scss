@@ -11,6 +11,10 @@
   background-color: var(--currency-indicator-bg-color);
 
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-primary-inactive-bg-color);
+  }
 }
 
 .account-selector__name {

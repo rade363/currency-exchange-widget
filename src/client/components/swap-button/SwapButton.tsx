@@ -9,7 +9,7 @@ function SwapButton({ className, ...otherButtonProps }: OwnProps) {
       className={`swap-button ${className || ''}`}
       type="button"
     >
-      ↑↓
+      <span className="swap-button__arrows">↑↓</span>
     </button>
   );
 }

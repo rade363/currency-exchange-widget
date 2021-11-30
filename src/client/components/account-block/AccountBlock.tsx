@@ -58,6 +58,10 @@ function AccountBlock({ type, currentAccount, otherAccount }: OwnProps) {
       return;
     }
 
+    if (typeof error === 'string' && error.includes('Max value')) {
+      return;
+    }
+
     setError(`Insufficient funds: ${remaining}`);
   }, [amount, currentAccount.balance]);
 

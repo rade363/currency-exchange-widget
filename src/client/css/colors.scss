@@ -1,7 +1,12 @@
 :root {
-  --black-color: #4D5167;
+  --inactive-opacity: 0.2;
+
   --red-color: #E43538;
+  --red-color-rgb: 228, 53, 56;
   --bright-blue-color: #4285F4;
+  --bright-blue-color-rgb: 66, 133, 244;
+
+  --black-color: #4D5167;
   --white-color: #fff;
   --lightest-grey-color: #F6F6F5;
   --lightest-blue-color: #EBEFF3;
@@ -14,6 +19,9 @@
   --currency-block-bg-color: var(--white-color);
   --search-bg-color: var(--white-color);
   --currency-indicator-bg-color: var(--lightest-grey-color);
+
+  --button-primary-inactive-bg-color: rgba(var(--bright-blue-color-rgb), var(--inactive-opacity));
+  --button-danger-inactive-bg-color: rgba(var(--red-color-rgb), var(--inactive-opacity));
 
   --button-primary-bg-color: var(--bright-blue-color);
   --button-danger-bg-color: var(--red-color);

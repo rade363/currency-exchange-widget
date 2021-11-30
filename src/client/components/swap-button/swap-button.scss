@@ -1,4 +1,5 @@
 .swap-button {
+  display: flex;
   margin: 0 auto;
 
   width: 3rem;
@@ -8,6 +9,9 @@
   border-radius: 50%;
   background-color: var(--button-swap-bg-color);
   cursor: pointer;
+
+  font-weight: 500;
+  font-size: 1.8rem;
 
   &:hover {
     color: var(--button-swap-font-hover-color);

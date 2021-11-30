@@ -1,8 +1,10 @@
 import React from 'react';
 import AccountBlock from '../account-block';
+import SwapButton from '../swap-button';
+import Button from '../button';
+import { BUTTON_INACTIVE_TEXT } from '../../constants';
 import { CurrencySignsLib, CurrencyNamesEnum, Currency } from '../account-block/types';
 import './app.scss';
-import SwapButton from '../swap-button/SwapButton';
 
 export default function App() {
   const currencySignsLib: CurrencySignsLib = {
@@ -55,6 +57,12 @@ export default function App() {
           currentAccount={accountTo}
           otherAccount={accountFrom}
         />
+        <Button
+          active={false}
+          styleType="primary"
+        >
+          {BUTTON_INACTIVE_TEXT}
+        </Button>
       </div>
     </div>
   );
