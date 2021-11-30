@@ -47,6 +47,7 @@ module.exports = {
     ],
 
     'import/no-extraneous-dependencies': 'off',
+    'react/function-component-definition': 'off',
     'react/destructuring-assignment': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-one-expression-per-line': 'off',
