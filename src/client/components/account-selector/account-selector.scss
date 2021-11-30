@@ -1,0 +1,25 @@
+.account-selector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 10px 7px;
+
+  border-radius: 4px;
+  border: none;
+
+  background-color: var(--currency-indicator-bg-color);
+
+  cursor: pointer;
+}
+
+.account-selector__name {
+  font-weight: 700;
+  margin: 2px 7px 0;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+}
+
+.account-selector__arrow {
+  min-width: 2rem;
+}

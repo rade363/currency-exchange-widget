@@ -1,0 +1,66 @@
+.account-block {
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--currency-block-bg-color);
+  padding: 1.5rem;
+  border-radius: 4px;
+
+  font-size: 1.4rem;
+}
+
+.account-block__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.account-block__type {
+  flex: 10rem;
+  font-weight: 500;
+}
+
+.account-block__balance {
+  text-align: right;
+}
+
+.account-block__selector {
+  margin: 1.5rem 0;
+
+  &:hover {
+    background-color: var(--bright-blue-color);
+  }
+}
+
+.account-block__input {
+  color: var(--font-color);
+  width: 100%;
+  border: 0;
+  padding: 0;
+
+  font-size: 3.6rem;
+  text-align: right;
+}
+
+input[type=number].account-block__input::-webkit-outer-spin-button,
+input.account-block__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number].account-block__input {
+  -moz-appearance: textfield;
+}
+
+.account-block__rate {
+  flex: 10rem;
+}
+
+.account-block__result {
+  text-align: right;
+}
+
+.account-block__result_error {
+  color: var(--font-error-color);
+}
