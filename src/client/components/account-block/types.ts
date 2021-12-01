@@ -1,22 +1,4 @@
-export enum CurrencyNamesEnum {
-  USD = 'USD',
-  GBP = 'GBP',
-  EUR = 'EUR',
-}
-
-export type CurrencySignsLib = {
-  [key in CurrencyNamesEnum]: string
-};
-
-// type Currency<T extends keyof CurrencyEnum> = [T, CurrencySigns[T]];
-
-type CurrencyName = keyof typeof CurrencyNamesEnum;
-
-export type Currency = {
-  name: CurrencyName;
-  sign: CurrencySignsLib[CurrencyName];
-  rate: number;
-};
+import { Currency } from '../../utils/create-currency/types';
 
 export type Account = {
   balance: number;

@@ -63,6 +63,9 @@ export default {
   },
   plugins: [
     new webpack.DefinePlugin(envKeys),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
     new MiniCssExtractPlugin({
       filename: 'assets/style/index.css',
     }),

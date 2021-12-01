@@ -1,0 +1,16 @@
+{
+  "accounts": [
+    {
+      "name": "USD",
+      "balance": 1137.42
+    },
+    {
+      "name": "EUR",
+      "balance": 0
+    },
+    {
+      "name": "GBP",
+      "balance": 2000.00
+    }
+  ]
+}

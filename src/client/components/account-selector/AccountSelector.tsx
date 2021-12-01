@@ -1,5 +1,5 @@
 import React from 'react';
-import CurrencySign from '../currency-sign/CurrencySign';
+import CurrencySign from '../currency-sign';
 import { OwnProps } from './types';
 import arrowDown from '../account-block/arrow.svg';
 import './account-selector.scss';
