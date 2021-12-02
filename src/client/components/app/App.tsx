@@ -15,6 +15,8 @@ export default function App() {
     areRatesCollected,
     accountFrom,
     accountTo,
+    handleAccountFromInputChange,
+    handleAccountToInputChange,
   } = useAccounts(user as User);
 
   if (!areRatesCollected || !accountFrom || !accountTo) {
@@ -35,6 +37,7 @@ export default function App() {
           type="From"
           currentAccount={accountFrom}
           otherAccount={accountTo}
+          onInputChange={handleAccountFromInputChange}
         />
         <SwapButton
           onClick={() => console.log('Clicked')}
@@ -43,6 +46,7 @@ export default function App() {
           type="To"
           currentAccount={accountTo}
           otherAccount={accountFrom}
+          onInputChange={handleAccountToInputChange}
         />
         <Button
           active={false}
