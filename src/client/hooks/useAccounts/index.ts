@@ -139,12 +139,32 @@ const useAccounts = (user: User) => {
     });
   };
 
+  const swapAccounts = () => {
+    if (!accountFrom || !accountTo) {
+      return;
+    }
+
+    const tempAccountFrom = {
+      ...accountFrom,
+      result: null,
+      error: null,
+    };
+    const tempAccountTo = {
+      ...accountTo,
+      result: (accountTo.balance - Number(accountTo.change)).toFixed(2),
+      error: validateValue(accountTo.change, accountTo.balance),
+    };
+    setAccountFrom(tempAccountTo);
+    setAccountTo(tempAccountFrom);
+  };
+
   return {
     areRatesCollected,
     accountFrom,
     accountTo,
     handleAccountFromInputChange,
     handleAccountToInputChange,
+    swapAccounts,
   };
 };
 
