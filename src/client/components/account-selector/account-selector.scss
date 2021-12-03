@@ -1,29 +1,61 @@
 .account-selector {
+  width: 46rem;
+  height: 55rem;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--search-bg-color);
+  border-radius: 14px;
+  box-shadow: 0px 0px 5px rgba(18, 52, 77, 0.16), 0px 12px 36px rgba(18, 52, 77, 0.04);
+}
+
+.account-selector__row {
+  display: flex;
+  flex-direction: row;
+
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.account-selector__title {
+  display: flex;
+  flex: 1;
+
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.account-selector__close-button {
+  display: flex;
+  align-items: center;
+}
+
+.account-selector__search {
+  padding: 0 2rem;
+}
+
+.account-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  padding: 10px 7px;
-
-  border-radius: 4px;
-  border: none;
-
-  background-color: var(--currency-indicator-bg-color);
-
+  padding: 1rem 2rem;
   cursor: pointer;
 
   &:hover {
-    background-color: var(--button-primary-inactive-bg-color);
+    background-color: var(--currency-label-bg-color);
   }
 }
 
-.account-selector__name {
-  font-weight: 700;
-  margin: 2px 7px 0;
-  font-size: 1.4rem;
-  line-height: 1.4rem;
+.account-item__currency {
+  &:hover {
+    background-color: var(--currency-label-bg-color);
+  }
 }
 
-.account-selector__arrow {
-  min-width: 2rem;
+.account-item__balance {
+  flex: 1;
+
+  text-align: right;
+  font-size: 1.8rem;
 }

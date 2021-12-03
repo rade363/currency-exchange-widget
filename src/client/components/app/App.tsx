@@ -1,26 +1,20 @@
-import React from 'react';
-import AccountBlock from '../account-block';
-import SwapButton from '../swap-button';
-import Button from '../button';
+import React, { useState } from 'react';
+import useRates from '../../hooks/useRates';
 import Loader from '../loader';
-import useAccounts from '../../hooks/useAccounts';
-import { BUTTON_INACTIVE_TEXT } from '../../constants';
+import ExchangeBlock from '../exchange-block';
+
 import './app.scss';
 
-import user from './user.json';
-import { User } from '../../hooks/useAccounts/types';
+import userAccountSample from './user.json';
+import { User, UserAccount } from './types';
+
+const user = userAccountSample as User;
 
 export default function App() {
-  const {
-    areRatesCollected,
-    accountFrom,
-    accountTo,
-    handleAccountFromInputChange,
-    handleAccountToInputChange,
-    swapAccounts,
-  } = useAccounts(user as User);
+  const [accounts, setAccounts] = useState<UserAccount[]>(user.accounts);
+  const { areRatesCollected, rates } = useRates();
 
-  if (!areRatesCollected || !accountFrom || !accountTo) {
+  if (!areRatesCollected || !rates) {
     return (
       <div className="app">
         <Loader />
@@ -30,32 +24,11 @@ export default function App() {
 
   return (
     <div className="app">
-      <div className="app__container">
-        <h1 className="app__title">
-          Exchange {accountFrom.currency.name} to {accountTo.currency.name}
-        </h1>
-        <AccountBlock
-          type="From"
-          currentAccount={accountFrom}
-          otherAccount={accountTo}
-          onInputChange={handleAccountFromInputChange}
-        />
-        <SwapButton
-          onClick={swapAccounts}
-        />
-        <AccountBlock
-          type="To"
-          currentAccount={accountTo}
-          otherAccount={accountFrom}
-          onInputChange={handleAccountToInputChange}
-        />
-        <Button
-          active={false}
-          styleType="primary"
-        >
-          {BUTTON_INACTIVE_TEXT}
-        </Button>
-      </div>
+      <ExchangeBlock
+        rates={rates}
+        accounts={accounts}
+        setAccounts={setAccounts}
+      />
     </div>
   );
 }

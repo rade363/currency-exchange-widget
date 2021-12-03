@@ -1,30 +1,28 @@
-import { Currency, CurrencyName } from './types';
+import { CurrencyName, CurrencyWithRate } from './types';
 import { RatesTable } from '../calculate-rates/types';
+import { usd, gbp, eur } from './currencies';
 
 function createCurrency(
   currentCurrencyName: CurrencyName,
   otherCurrencyName: CurrencyName,
   rates: RatesTable,
-): Currency {
+): CurrencyWithRate {
   if (currentCurrencyName === 'USD') {
     return {
-      name: 'USD',
-      sign: '$',
+      ...usd,
       rate: otherCurrencyName === 'EUR' ? rates.usdToEur : rates.usdToGbp,
     };
   }
 
   if (currentCurrencyName === 'GBP') {
     return {
-      name: 'GBP',
-      sign: '£',
+      ...gbp,
       rate: otherCurrencyName === 'EUR' ? rates.gbpToEur : rates.gbpToUsd,
     };
   }
 
   return {
-    name: 'EUR',
-    sign: '€',
+    ...eur,
     rate: otherCurrencyName === 'USD' ? rates.eurToUsd : rates.eurToGbp,
   };
 }

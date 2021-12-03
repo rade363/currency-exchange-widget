@@ -1,7 +1,8 @@
 import { memo } from 'react';
 
 import AccountBlock from './AccountBlock';
-import { Account, OwnProps } from './types';
+import { OwnProps } from './types';
+import { Account } from '../../hooks/useExchange/types';
 
 function areAccountsEqual(prevAccountState: Account, nextAccountState: Account): boolean {
   if (prevAccountState.balance !== nextAccountState.balance) {

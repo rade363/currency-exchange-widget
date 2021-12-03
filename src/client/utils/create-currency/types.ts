@@ -1,7 +1,11 @@
-type USD = { name: 'USD', sign: '$', rate: number };
-type GBP = { name: 'GBP', sign: '£', rate: number };
-type EUR = { name: 'EUR', sign: '€', rate: number };
+export type USD = { name: 'USD', sign: '$' };
+export type GBP = { name: 'GBP', sign: '£' };
+export type EUR = { name: 'EUR', sign: '€' };
 
 export type Currency = USD | GBP | EUR;
 
 export type CurrencyName = 'USD' | 'GBP' | 'EUR';
+
+export type CurrencyWithRate = {
+  rate: number;
+} & Currency;

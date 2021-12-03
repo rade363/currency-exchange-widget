@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { fetchRates } from '../../api/exchange-rates-api/rates';
-import calculateRates from '../../utils/calculate-rates';
 import createCurrency from '../../utils/create-currency';
-import { User } from './types';
+import { Account } from './types';
 import { Nullable } from '../../../types';
-import { Account } from '../../components/account-block/types';
+import { UserAccount } from '../../components/app/types';
+import { AccountType } from '../../components/account-block/types';
+import { SetAccountsCallback } from '../../components/exchange-block/types';
 import { RatesTable } from '../../utils/calculate-rates/types';
 import { MAX_INPUT_VALUE } from '../../constants';
 
@@ -22,64 +22,50 @@ function validateValue(value: string, balance: number): Nullable<string> {
   return null;
 }
 
-const useAccounts = (user: User) => {
-  const [areRatesCollected, setAreRatesCollected] = useState<boolean>(false);
-  const [rates, setRates] = useState<Nullable<RatesTable>>(null);
+const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: SetAccountsCallback) => {
+  const [isSelectorOpen, setIsSelectorOpen] = useState<boolean>(false);
   const [accountFrom, setAccountFrom] = useState<Nullable<Account>>(null);
   const [accountTo, setAccountTo] = useState<Nullable<Account>>(null);
+  const [accountToReplace, setAccountToReplace] = useState<Nullable<Account>>(null);
+  const [accountToReplaceType, setAccountToReplaceType] = useState<Nullable<AccountType>>(null);
 
   useEffect(() => {
-    if (!areRatesCollected) {
-      fetchRates()
-        .then(response => {
-          setRates(calculateRates(response.data));
-          setAreRatesCollected(true);
-        })
-        .catch(error => {
-          console.error('[ERROR] Could not fetch rates', error);
-        });
-    }
-  }, [areRatesCollected]);
+    const [firstAccount, secondAccount] = accounts;
 
-  useEffect(() => {
-    if (areRatesCollected && rates) {
-      const [firstAccount, secondAccount] = user.accounts;
-
-      setAccountFrom(prevAccountFrom => {
-        if (prevAccountFrom && accountTo) {
-          return {
-            ...prevAccountFrom,
-            currency: createCurrency(prevAccountFrom.currency.name, accountTo.currency.name, rates),
-          };
-        }
-
+    setAccountFrom(prevAccountFrom => {
+      if (prevAccountFrom && accountTo) {
         return {
-          balance: firstAccount.balance,
-          change: '0.00',
-          result: null,
-          error: null,
-          currency: createCurrency(firstAccount.name, secondAccount.name, rates),
+          ...prevAccountFrom,
+          currency: createCurrency(prevAccountFrom.currency.name, accountTo.currency.name, rates),
         };
-      });
+      }
 
-      setAccountTo(prevAccountTo => {
-        if (prevAccountTo && accountFrom) {
-          return {
-            ...prevAccountTo,
-            currency: createCurrency(prevAccountTo.currency.name, accountFrom.currency.name, rates),
-          };
-        }
+      return {
+        balance: firstAccount.balance,
+        change: '0.00',
+        result: null,
+        error: null,
+        currency: createCurrency(firstAccount.name, secondAccount.name, rates),
+      };
+    });
 
+    setAccountTo(prevAccountTo => {
+      if (prevAccountTo && accountFrom) {
         return {
-          balance: secondAccount.balance,
-          change: '0.00',
-          result: null,
-          error: null,
-          currency: createCurrency(secondAccount.name, firstAccount.name, rates),
+          ...prevAccountTo,
+          currency: createCurrency(prevAccountTo.currency.name, accountFrom.currency.name, rates),
         };
-      });
-    }
-  }, [areRatesCollected, rates, user.accounts]);
+      }
+
+      return {
+        balance: secondAccount.balance,
+        change: '0.00',
+        result: null,
+        error: null,
+        currency: createCurrency(secondAccount.name, firstAccount.name, rates),
+      };
+    });
+  }, [rates, accounts]);
 
   const handleAccountFromInputChange = (value: string) => {
     setAccountFrom(prevAccountFrom => {
@@ -158,14 +144,37 @@ const useAccounts = (user: User) => {
     setAccountTo(tempAccountFrom);
   };
 
+  const chooseFromAccount = () => {
+    setIsSelectorOpen(true);
+    setAccountToReplaceType('From');
+    setAccountToReplace(accountFrom);
+  };
+
+  const chooseToAccount = () => {
+    setIsSelectorOpen(true);
+    setAccountToReplaceType('To');
+    setAccountToReplace(accountTo);
+  };
+
+  const closeSelector = () => {
+    setIsSelectorOpen(false);
+    setAccountToReplaceType(null);
+    setAccountToReplace(null);
+  };
+
   return {
-    areRatesCollected,
+    isSelectorOpen,
     accountFrom,
     accountTo,
+    accountToReplace,
+    accountToReplaceType,
     handleAccountFromInputChange,
     handleAccountToInputChange,
     swapAccounts,
+    chooseFromAccount,
+    chooseToAccount,
+    closeSelector,
   };
 };
 
-export default useAccounts;
+export default useExchange;

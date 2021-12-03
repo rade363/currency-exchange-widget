@@ -1,5 +1,5 @@
 import React, { useCallback, ChangeEvent } from 'react';
-import AccountSelector from '../account-selector';
+import CurrencyLabel from '../currency-label';
 import { OwnProps } from './types';
 import { Nullable } from '../../../types';
 import './account-block.scss';
@@ -12,7 +12,7 @@ function setStatus(error: Nullable<string>, result: Nullable<string>): string {
   return result === null ? '' : `Result: ${result}`;
 }
 
-function AccountBlock({ type, currentAccount, otherAccount, onInputChange }: OwnProps) {
+function AccountBlock({ type, currentAccount, otherAccount, onInputChange, handleSelectorClick }: OwnProps) {
   const { balance, change, result, error, currency } = currentAccount;
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +43,11 @@ function AccountBlock({ type, currentAccount, otherAccount, onInputChange }: Own
         <div className="account-block__balance">Balance: {balance}</div>
       </div>
       <div className="account-block__row">
-        <AccountSelector
+        <CurrencyLabel
           className="account-block__selector"
           currency={currency}
+          onClick={handleSelectorClick}
+          showArrow
         />
         <input
           className="account-block__input"

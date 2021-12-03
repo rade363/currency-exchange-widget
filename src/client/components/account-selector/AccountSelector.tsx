@@ -1,27 +1,53 @@
 import React from 'react';
-import CurrencySign from '../currency-sign';
 import { OwnProps } from './types';
-import arrowDown from '../account-block/arrow.svg';
+import CurrencyLabel from '../currency-label';
+import CloseButton from '../close-button';
+import Search from '../search';
 import './account-selector.scss';
+import useSearchFilter from '../../hooks/useSearchFilter';
 
-function AccountSelector({ currency, className, ...otherButtonProps }: OwnProps) {
+function AccountSelector({ type, accountToReplace, accounts, closeSelector }: OwnProps) {
+  const {
+    searchKey,
+    filteredAccounts,
+    handleSearchInput,
+  } = useSearchFilter(accounts);
   return (
-    <button
-      {...otherButtonProps}
-      className={`account-selector ${className || ''}`}
-      type="button"
-    >
-      <CurrencySign
-        className="account-selector__sign"
-        sign={currency.sign}
+    <div className="account-selector">
+      <div className="account-selector__row">
+        <h1 className="account-selector__title">{type} account</h1>
+        <div className="account-selector__close-button">
+          <CloseButton onClick={closeSelector} />
+        </div>
+      </div>
+      <Search
+        className="account-selector__search"
+        placeholder="Search account by name"
+        value={searchKey}
+        onChange={handleSearchInput}
       />
-      <div className="account-selector__name">{currency.name}</div>
-      <img
-        className="account-selector__arrow"
-        src={arrowDown}
-        alt="arrow-down"
-      />
-    </button>
+      <ul className="account-selector__list">
+        {filteredAccounts.map(account => (
+          <li
+            className="account-selector__item"
+            key={account.currency.name}
+          >
+            <div className="account-item">
+              <CurrencyLabel
+                className="account-item__currency"
+                currency={account.currency}
+                showArrow={false}
+              />
+              <div
+                className="account-item__balance"
+              >
+                {account.balance}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
