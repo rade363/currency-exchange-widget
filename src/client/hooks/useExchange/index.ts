@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import createCurrency from '../../utils/create-currency';
 import { Account } from './types';
 import { Nullable } from '../../../types';
@@ -7,6 +7,7 @@ import { AccountType } from '../../components/account-block/types';
 import { SetAccountsCallback } from '../../components/exchange-block/types';
 import { RatesTable } from '../../utils/calculate-rates/types';
 import { MAX_INPUT_VALUE } from '../../constants';
+import { CurrencyName } from '../../utils/create-currency/types';
 
 function validateValue(value: string, balance: number): Nullable<string> {
   if (Number(value) > Number(MAX_INPUT_VALUE)) {
@@ -26,7 +27,6 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
   const [isSelectorOpen, setIsSelectorOpen] = useState<boolean>(false);
   const [accountFrom, setAccountFrom] = useState<Nullable<Account>>(null);
   const [accountTo, setAccountTo] = useState<Nullable<Account>>(null);
-  const [accountToReplace, setAccountToReplace] = useState<Nullable<Account>>(null);
   const [accountToReplaceType, setAccountToReplaceType] = useState<Nullable<AccountType>>(null);
 
   useEffect(() => {
@@ -147,26 +147,84 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
   const chooseFromAccount = () => {
     setIsSelectorOpen(true);
     setAccountToReplaceType('From');
-    setAccountToReplace(accountFrom);
   };
 
   const chooseToAccount = () => {
     setIsSelectorOpen(true);
     setAccountToReplaceType('To');
-    setAccountToReplace(accountTo);
   };
 
   const closeSelector = () => {
     setIsSelectorOpen(false);
     setAccountToReplaceType(null);
-    setAccountToReplace(null);
   };
+
+  const changeAccount = useCallback((newAccountName: CurrencyName) => {
+    const accountToReplace = accountToReplaceType === 'From' ? accountFrom : accountTo;
+    const otherAccount = accountToReplaceType === 'From' ? accountTo : accountFrom;
+    if (!accountToReplace || !otherAccount) {
+      return;
+    }
+
+    if (newAccountName === accountToReplace.currency.name) {
+      closeSelector();
+      return;
+    }
+
+    if (newAccountName === otherAccount.currency.name) {
+      swapAccounts();
+      closeSelector();
+      return;
+    }
+
+    const relevantUserAccount = accounts.find(account => account.name === newAccountName);
+    const newAccount = {
+      balance: relevantUserAccount!.balance,
+      change: '0.00',
+      result: null,
+      error: null,
+      currency: createCurrency(relevantUserAccount!.name, otherAccount.currency.name, rates),
+    };
+
+    if (accountToReplaceType === 'From') {
+      setAccountTo(prevAccountTo => {
+        if (!prevAccountTo) {
+          return null;
+        }
+
+        return {
+          ...prevAccountTo,
+          change: '0.00',
+          result: null,
+          error: null,
+        };
+      });
+      setAccountFrom(newAccount);
+      closeSelector();
+
+      return;
+    }
+
+    setAccountFrom(prevAccountFrom => {
+      if (!prevAccountFrom) {
+        return null;
+      }
+
+      return {
+        ...prevAccountFrom,
+        change: '0.00',
+        result: null,
+        error: null,
+      };
+    });
+    setAccountTo(newAccount);
+    closeSelector();
+  }, [accountFrom, accountTo, accountToReplaceType, accounts, rates, swapAccounts]);
 
   return {
     isSelectorOpen,
     accountFrom,
     accountTo,
-    accountToReplace,
     accountToReplaceType,
     handleAccountFromInputChange,
     handleAccountToInputChange,
@@ -174,6 +232,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     chooseFromAccount,
     chooseToAccount,
     closeSelector,
+    changeAccount,
   };
 };
 

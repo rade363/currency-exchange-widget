@@ -6,7 +6,7 @@ import Search from '../search';
 import './account-selector.scss';
 import useSearchFilter from '../../hooks/useSearchFilter';
 
-function AccountSelector({ type, accountToReplace, accounts, closeSelector }: OwnProps) {
+function AccountSelector({ type, accounts, closeSelector, selectAccount }: OwnProps) {
   const {
     searchKey,
     filteredAccounts,
@@ -32,7 +32,10 @@ function AccountSelector({ type, accountToReplace, accounts, closeSelector }: Ow
             className="account-selector__item"
             key={account.currency.name}
           >
-            <div className="account-item">
+            <div
+              className="account-item"
+              onClick={() => selectAccount(account.currency.name)}
+            >
               <CurrencyLabel
                 className="account-item__currency"
                 currency={account.currency}

@@ -14,7 +14,6 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
     isSelectorOpen,
     accountFrom,
     accountTo,
-    accountToReplace,
     accountToReplaceType,
     handleAccountFromInputChange,
     handleAccountToInputChange,
@@ -22,6 +21,7 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
     chooseFromAccount,
     chooseToAccount,
     closeSelector,
+    changeAccount,
   } = useExchange(rates, accounts, setAccounts);
 
   if (!accountFrom || !accountTo) {
@@ -30,13 +30,13 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
     );
   }
 
-  if (isSelectorOpen && accountToReplace && accountToReplaceType) {
+  if (isSelectorOpen && accountToReplaceType) {
     return (
       <AccountSelector
-        accountToReplace={accountToReplace}
         type={accountToReplaceType}
         accounts={accounts}
         closeSelector={closeSelector}
+        selectAccount={changeAccount}
       />
     );
   }
