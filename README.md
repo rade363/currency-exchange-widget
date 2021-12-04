@@ -8,9 +8,20 @@
 
 ## Usage
 * Install dependencies using `npm i`.
+* Create an `.env` file in the root directory of the project. Sample is available below.
 * Build the app using `npm run build`.
 * Start the app using `npm run start`.
 * Open [http://localhost:5000](http://localhost:5000) in your web browser to access the app.
 
 ## Other
 * Run the tests by `npm run test`.
+
+## ENV File Sample
+```
+NODE_ENV=development
+
+WEB_HOST=http://localhost
+WEB_PORT=5000
+
+EXCHANGE_RATES_API_KEY=specify-exchangeratesapi.io-key-here
+```

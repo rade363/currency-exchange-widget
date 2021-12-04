@@ -1,5 +1,6 @@
 import React, { useCallback, ChangeEvent } from 'react';
 import CurrencyLabel from '../currency-label';
+import { DECIMAL_ACCURACY } from '../../constants';
 import { OwnProps } from './types';
 import { Nullable } from '../../../types';
 import './account-block.scss';
@@ -24,7 +25,7 @@ function AccountBlock({ type, currentAccount, otherAccount, onInputChange, handl
 
   const handleBlur = useCallback(() => {
     if (change.indexOf('.') < 0) {
-      const newNumber = Number(change).toFixed(2);
+      const newNumber = Number(change).toFixed(DECIMAL_ACCURACY);
       onInputChange(newNumber);
       return;
     }
@@ -36,7 +37,7 @@ function AccountBlock({ type, currentAccount, otherAccount, onInputChange, handl
       return;
     }
 
-    onInputChange(Number(change).toFixed(2));
+    onInputChange(Number(change).toFixed(DECIMAL_ACCURACY));
   }, [change, onInputChange]);
 
   return (
@@ -63,7 +64,7 @@ function AccountBlock({ type, currentAccount, otherAccount, onInputChange, handl
       </div>
       <div className="account-block__row">
         <div className="account-block__rate">
-          {currency.sign}1 = {otherAccount.currency.sign}{currency.rate}
+          {currency.sign}1 = {otherAccount.currency.sign}{currency.rate.toFixed(DECIMAL_ACCURACY)}
         </div>
         <div className={`account-block__result ${error ? 'account-block__result_error' : ''}`}>
           { setStatus(error, result) }

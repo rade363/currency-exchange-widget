@@ -6,7 +6,7 @@ import { UserAccount } from '../../components/app/types';
 import { AccountType } from '../../components/account-block/types';
 import { SetAccountsCallback } from '../../components/exchange-block/types';
 import { RatesTable } from '../../utils/calculate-rates/types';
-import { MAX_INPUT_VALUE } from '../../constants';
+import { MAX_INPUT_VALUE, DECIMAL_ACCURACY } from '../../constants';
 import { CurrencyName } from '../../utils/create-currency/types';
 
 function validateValue(value: string, balance: number): Nullable<string> {
@@ -17,7 +17,7 @@ function validateValue(value: string, balance: number): Nullable<string> {
   const remaining = balance - Number(value);
 
   if (remaining < 0) {
-    return `Insufficient funds: ${remaining.toFixed(2)}`;
+    return `Insufficient funds: ${remaining.toFixed(DECIMAL_ACCURACY)}`;
   }
 
   return null;
@@ -78,7 +78,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
       return {
         ...prevAccountFrom,
         change: value,
-        result: newValue === 0 ? null : (prevAccountFrom.balance - newValue).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountFrom.balance - newValue).toFixed(DECIMAL_ACCURACY),
         error: validateValue(value, prevAccountFrom.balance),
       };
     });
@@ -89,12 +89,12 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
       }
 
       const newValue = Number(value);
-      const change = (newValue * accountFrom.currency.rate).toFixed(2);
+      const change = (newValue * accountFrom.currency.rate).toFixed(DECIMAL_ACCURACY);
 
       return {
         ...prevAccountTo,
         change,
-        result: newValue === 0 ? null : (prevAccountTo.balance + Number(change)).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountTo.balance + Number(change)).toFixed(DECIMAL_ACCURACY),
       };
     });
   };
@@ -110,7 +110,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
       return {
         ...prevAccountTo,
         change: value,
-        result: newValue === 0 ? null : (prevAccountTo.balance + newValue).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountTo.balance + newValue).toFixed(DECIMAL_ACCURACY),
       };
     });
 
@@ -120,12 +120,12 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
       }
 
       const newValue = Number(value);
-      const change = (newValue * accountTo.currency.rate).toFixed(2);
+      const change = (newValue * accountTo.currency.rate).toFixed(DECIMAL_ACCURACY);
 
       return {
         ...prevAccountFrom,
         change,
-        result: newValue === 0 ? null : (prevAccountFrom.balance - Number(change)).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountFrom.balance - Number(change)).toFixed(DECIMAL_ACCURACY),
         error: validateValue(change, prevAccountFrom.balance),
       };
     });
@@ -144,7 +144,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     const accountToChange = Number(accountTo.change);
     const tempAccountTo = {
       ...accountTo,
-      result: accountToChange === 0 ? null : (accountTo.balance - accountToChange).toFixed(2),
+      result: accountToChange === 0 ? null : (accountTo.balance - accountToChange).toFixed(DECIMAL_ACCURACY),
       error: validateValue(accountTo.change, accountTo.balance),
     };
     setAccountFrom(tempAccountTo);
