@@ -1,7 +1,8 @@
+import { Dispatch, SetStateAction } from 'react';
 import { RatesTable } from '../../utils/calculate-rates/types';
 import { UserAccount } from '../app/types';
 
-export type SetAccountsCallback = (accounts: UserAccount[]) => void;
+export type SetAccountsCallback = Dispatch<SetStateAction<UserAccount[]>>;
 
 export type OwnProps = {
   rates: RatesTable;

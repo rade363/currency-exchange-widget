@@ -73,10 +73,12 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
         return null;
       }
 
+      const newValue = Number(value);
+
       return {
         ...prevAccountFrom,
         change: value,
-        result: (prevAccountFrom.balance - Number(value)).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountFrom.balance - newValue).toFixed(2),
         error: validateValue(value, prevAccountFrom.balance),
       };
     });
@@ -86,12 +88,13 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
         return null;
       }
 
-      const change = (Number(value) * accountFrom.currency.rate).toFixed(2);
+      const newValue = Number(value);
+      const change = (newValue * accountFrom.currency.rate).toFixed(2);
 
       return {
         ...prevAccountTo,
         change,
-        result: (prevAccountTo.balance + Number(change)).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountTo.balance + Number(change)).toFixed(2),
       };
     });
   };
@@ -102,10 +105,12 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
         return null;
       }
 
+      const newValue = Number(value);
+
       return {
         ...prevAccountTo,
         change: value,
-        result: (prevAccountTo.balance + Number(value)).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountTo.balance + newValue).toFixed(2),
       };
     });
 
@@ -114,18 +119,19 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
         return null;
       }
 
-      const change = (Number(value) * accountTo.currency.rate).toFixed(2);
+      const newValue = Number(value);
+      const change = (newValue * accountTo.currency.rate).toFixed(2);
 
       return {
         ...prevAccountFrom,
         change,
-        result: (prevAccountFrom.balance - Number(change)).toFixed(2),
+        result: newValue === 0 ? null : (prevAccountFrom.balance - Number(change)).toFixed(2),
         error: validateValue(change, prevAccountFrom.balance),
       };
     });
   };
 
-  const swapAccounts = () => {
+  const swapAccounts = useCallback(() => {
     if (!accountFrom || !accountTo) {
       return;
     }
@@ -135,14 +141,15 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
       result: null,
       error: null,
     };
+    const accountToChange = Number(accountTo.change);
     const tempAccountTo = {
       ...accountTo,
-      result: (accountTo.balance - Number(accountTo.change)).toFixed(2),
+      result: accountToChange === 0 ? null : (accountTo.balance - accountToChange).toFixed(2),
       error: validateValue(accountTo.change, accountTo.balance),
     };
     setAccountFrom(tempAccountTo);
     setAccountTo(tempAccountFrom);
-  };
+  }, [accountFrom, accountTo]);
 
   const chooseFromAccount = () => {
     setIsSelectorOpen(true);
@@ -221,6 +228,56 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     closeSelector();
   }, [accountFrom, accountTo, accountToReplaceType, accounts, rates, swapAccounts]);
 
+  const transferMoney = (isButtonActive: boolean, isErrorPresent: boolean) => {
+    if (!accountFrom || !accountTo || isErrorPresent || !isButtonActive) {
+      return;
+    }
+
+    setAccounts((prevAccounts: UserAccount[]) => prevAccounts.map(userAccount => {
+      if (userAccount.name === accountFrom.currency.name) {
+        return {
+          ...userAccount,
+          balance: Number(accountFrom.result),
+        };
+      }
+
+      if (userAccount.name === accountTo.currency.name) {
+        return {
+          ...userAccount,
+          balance: Number(accountTo.result),
+        };
+      }
+
+      return userAccount;
+    }));
+
+    setAccountFrom(prevAccountFrom => {
+      if (!prevAccountFrom) {
+        return null;
+      }
+
+      return {
+        ...prevAccountFrom,
+        balance: Number(prevAccountFrom.result),
+        change: '0.00',
+        result: null,
+      };
+    });
+
+    setAccountTo(prevAccountTo => {
+      if (!prevAccountTo) {
+        return null;
+      }
+
+      return {
+        ...prevAccountTo,
+        balance: Number(prevAccountTo.result),
+        change: '0.00',
+        result: null,
+      };
+    });
+  };
+
   return {
     isSelectorOpen,
     accountFrom,
@@ -233,6 +290,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     chooseToAccount,
     closeSelector,
     changeAccount,
+    transferMoney,
   };
 };
 

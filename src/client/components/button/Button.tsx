@@ -7,7 +7,7 @@ function Button({ children, active, styleType, className, ...otherProps }: OwnPr
     <button
       {...otherProps}
       type="button"
-      className={`button button_${styleType}${active ? '_active' : ''} ${className || ''}`}
+      className={`button button_${styleType} ${active ? 'button_active' : ''} ${className || ''}`}
     >
       {children}
     </button>

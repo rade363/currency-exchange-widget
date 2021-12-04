@@ -5,7 +5,7 @@ import AccountBlock from '../account-block';
 import SwapButton from '../swap-button';
 import Button from '../button';
 import Loader from '../loader';
-import { BUTTON_INACTIVE_TEXT } from '../../constants';
+import setButtonText from '../../utils/set-button-text';
 import { OwnProps } from './types';
 import './exchange-block.scss';
 
@@ -22,6 +22,7 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
     chooseToAccount,
     closeSelector,
     changeAccount,
+    transferMoney,
   } = useExchange(rates, accounts, setAccounts);
 
   if (!accountFrom || !accountTo) {
@@ -40,6 +41,9 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
       />
     );
   }
+
+  const isErrorPresent = accountFrom.error !== null || accountTo.error !== null;
+  const isButtonActive = Number(accountFrom.change) !== 0 && Number(accountTo.change) !== 0;
 
   return (
     <div className="exchange-block">
@@ -64,10 +68,12 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
         handleSelectorClick={chooseToAccount}
       />
       <Button
-        active={false}
-        styleType="primary"
+        active={isButtonActive}
+        styleType={isErrorPresent ? 'danger' : 'primary'}
+        disabled={isErrorPresent}
+        onClick={() => transferMoney(isButtonActive, isErrorPresent)}
       >
-        {BUTTON_INACTIVE_TEXT}
+        {setButtonText(isErrorPresent, isButtonActive, accountFrom.currency.name, accountTo.currency.name)}
       </Button>
     </div>
   );

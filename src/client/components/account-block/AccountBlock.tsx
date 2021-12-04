@@ -16,7 +16,10 @@ function AccountBlock({ type, currentAccount, otherAccount, onInputChange, handl
   const { balance, change, result, error, currency } = currentAccount;
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event.currentTarget.value);
+    const newValue = event.currentTarget.value;
+    if (/^\d*\.?\d*$/gmi.test(newValue)) {
+      onInputChange(newValue);
+    }
   }, [onInputChange]);
 
   const handleBlur = useCallback(() => {
@@ -51,11 +54,8 @@ function AccountBlock({ type, currentAccount, otherAccount, onInputChange, handl
         />
         <input
           className="account-block__input"
-          type="number"
-          step="0.01"
+          type="text"
           placeholder="0.00"
-          max="9999999.99"
-          pattern={'^\\d*(\\.\\d{0,2})?$'}
           value={Number(change) === 0 ? '' : change}
           onChange={handleChange}
           onBlur={handleBlur}
