@@ -202,6 +202,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
 
         return {
           ...prevAccountTo,
+          currency: createCurrency(prevAccountTo.currency.name, newAccount.currency.name, rates),
           change: '0.00',
           result: null,
           error: null,
@@ -220,6 +221,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
 
       return {
         ...prevAccountFrom,
+        currency: createCurrency(prevAccountFrom.currency.name, newAccount.currency.name, rates),
         change: '0.00',
         result: null,
         error: null,
