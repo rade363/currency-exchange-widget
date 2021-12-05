@@ -1,13 +1,13 @@
 .account-selector {
-  width: 46rem;
-  height: 55rem;
-
   display: flex;
   flex-direction: column;
 
+  width: 100%;
+  height: 100%;
+
   background-color: var(--search-bg-color);
-  border-radius: 14px;
-  box-shadow: 0px 0px 5px rgba(18, 52, 77, 0.16), 0px 12px 36px rgba(18, 52, 77, 0.04);
+  border-radius: var(--wrapper-radius);
+  box-shadow: var(--base-shadow);
 }
 
 .account-selector__row {

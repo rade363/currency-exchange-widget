@@ -1,0 +1,30 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+
+  padding: 2rem;
+
+  background-color: var(--search-bg-color);
+  border-radius: var(--wrapper-radius);
+  box-shadow: var(--base-shadow);
+}
+
+.result__row {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.result__details {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.result__button-close {
+  width: 100%;
+}

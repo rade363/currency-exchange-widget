@@ -12,3 +12,5 @@ export const EXCHANGE_RATES_API_KEY = process.env.EXCHANGE_RATES_API_KEY;
 export const EXCHANGE_RATES_DECIMAL_ACCURACY = 6;
 
 export const DECIMAL_ACCURACY = 2;
+
+export const RESULT_TIMEOUT_MS = 5000;

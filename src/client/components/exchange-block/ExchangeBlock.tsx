@@ -5,6 +5,7 @@ import AccountBlock from '../account-block';
 import SwapButton from '../swap-button';
 import Button from '../button';
 import Loader from '../loader';
+import ResultBlock from '../result-block';
 import setButtonText from '../../utils/set-button-text';
 import { OwnProps } from './types';
 import './exchange-block.scss';
@@ -23,6 +24,8 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
     closeSelector,
     changeAccount,
     transferMoney,
+    transferResult,
+    closeResult,
   } = useExchange(rates, accounts, setAccounts);
 
   if (!accountFrom || !accountTo) {
@@ -38,6 +41,15 @@ function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
         accounts={accounts}
         closeSelector={closeSelector}
         selectAccount={changeAccount}
+      />
+    );
+  }
+
+  if (transferResult) {
+    return (
+      <ResultBlock
+        result={transferResult}
+        handleButtonClick={closeResult}
       />
     );
   }

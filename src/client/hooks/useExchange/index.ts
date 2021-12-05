@@ -6,7 +6,7 @@ import { UserAccount } from '../../components/app/types';
 import { AccountType } from '../../components/account-block/types';
 import { SetAccountsCallback } from '../../components/exchange-block/types';
 import { RatesTable } from '../../utils/calculate-rates/types';
-import { MAX_INPUT_VALUE, DECIMAL_ACCURACY } from '../../constants';
+import { MAX_INPUT_VALUE, DECIMAL_ACCURACY, RESULT_TIMEOUT_MS } from '../../constants';
 import { CurrencyName } from '../../utils/create-currency/types';
 
 function validateValue(value: string, balance: number): Nullable<string> {
@@ -28,6 +28,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
   const [accountFrom, setAccountFrom] = useState<Nullable<Account>>(null);
   const [accountTo, setAccountTo] = useState<Nullable<Account>>(null);
   const [accountToReplaceType, setAccountToReplaceType] = useState<Nullable<AccountType>>(null);
+  const [transferResult, setTransferResult] = useState<Nullable<string>>(null);
 
   useEffect(() => {
     const [firstAccount, secondAccount] = accounts;
@@ -233,6 +234,17 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
       return;
     }
 
+    const signFrom = accountFrom.currency.sign;
+    const changeFrom = accountFrom.change;
+    const signTo = accountTo.currency.sign;
+    const changeTo = accountTo.change;
+
+    setTransferResult(`You exchanged ${signFrom}${changeFrom} to ${signTo}${changeTo}`);
+
+    setTimeout(() => {
+      setTransferResult(null);
+    }, RESULT_TIMEOUT_MS);
+
     setAccounts((prevAccounts: UserAccount[]) => prevAccounts.map(userAccount => {
       if (userAccount.name === accountFrom.currency.name) {
         return {
@@ -278,8 +290,11 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     });
   };
 
+  const closeResult = () => setTransferResult(null);
+
   return {
     isSelectorOpen,
+    transferResult,
     accountFrom,
     accountTo,
     accountToReplaceType,
@@ -291,6 +306,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     closeSelector,
     changeAccount,
     transferMoney,
+    closeResult,
   };
 };
 

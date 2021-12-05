@@ -17,7 +17,7 @@ const useSearchFilter = (accounts: UserAccount[]) => {
   useEffect(() => {
     const remainingAccounts = allAccounts.filter(account => {
       const name = account.currency.name.toLowerCase();
-      return name.includes(searchKey);
+      return name.includes(searchKey.toLowerCase());
     });
     setFilteredAccounts(remainingAccounts);
   }, [allAccounts, searchKey]);

@@ -17,18 +17,22 @@ export default function App() {
   if (!areRatesCollected || !rates) {
     return (
       <div className="app">
-        <Loader />
+        <div className="app__container">
+          <Loader />
+        </div>
       </div>
     );
   }
 
   return (
     <div className="app">
-      <ExchangeBlock
-        rates={rates}
-        accounts={accounts}
-        setAccounts={setAccounts}
-      />
+      <div className="app__container">
+        <ExchangeBlock
+          rates={rates}
+          accounts={accounts}
+          setAccounts={setAccounts}
+        />
+      </div>
     </div>
   );
 }

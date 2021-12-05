@@ -9,3 +9,9 @@
   background-color: var(--app-bg-color);
   color: var(--font-color);
 }
+
+.app__container {
+  display: flex;
+  width: 46rem;
+  height: 55rem;
+}
