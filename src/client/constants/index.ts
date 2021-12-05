@@ -14,3 +14,8 @@ export const EXCHANGE_RATES_DECIMAL_ACCURACY = 6;
 export const DECIMAL_ACCURACY = 2;
 
 export const RESULT_TIMEOUT_MS = 5000;
+
+// eslint-disable-next-line
+export const RATES_REFRESH_ENABLED = Number(process.env.RATES_REFRESH_ENABLED);
+
+export const RATES_REFRESH_MS = Number(process.env.RATES_REFRESH_RATE_MS) || 10000;
