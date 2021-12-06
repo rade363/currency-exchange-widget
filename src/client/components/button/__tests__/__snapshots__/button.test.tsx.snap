@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Should render active primary button 1`] = `
+<button
+  className="button button_primary button_active "
+  disabled={false}
+  type="button"
+>
+  Click me
+</button>
+`;

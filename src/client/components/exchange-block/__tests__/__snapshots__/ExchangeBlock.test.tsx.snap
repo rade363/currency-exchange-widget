@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exchange block Should match snapshot 1`] = `
+<div
+  className="exchange-block"
+>
+  <h1
+    className="exchange-block__title"
+  >
+    Exchange 
+    USD
+     to 
+    GBP
+  </h1>
+  <div
+    className="account-block margin_tb_s-5"
+  >
+    <div
+      className="account-block__row"
+    >
+      <div
+        className="account-block__type"
+      >
+        From
+      </div>
+      <div
+        className="account-block__balance"
+      >
+        Balance: 
+        1137.42
+      </div>
+    </div>
+    <div
+      className="account-block__row"
+    >
+      <button
+        className="currency-label account-block__selector"
+        onClick={[MockFunction]}
+        type="button"
+      >
+        <div
+          className="currency-sign currency-label__sign"
+        >
+          $
+        </div>
+        <div
+          className="currency-label__name"
+        >
+          USD
+        </div>
+        <img
+          alt="arrow-down"
+          className="currency-label__arrow"
+          src="test-file-stub"
+        />
+      </button>
+      <input
+        className="account-block__input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="0.00"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="account-block__row"
+    >
+      <div
+        className="account-block__rate"
+      >
+        $
+        1 = 
+        £
+        0.75
+      </div>
+      <div
+        className="account-block__result "
+      >
+        
+      </div>
+    </div>
+  </div>
+  <button
+    className="swap-button "
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span
+      className="swap-button__arrows"
+    >
+      ↑↓
+    </span>
+  </button>
+  <div
+    className="account-block margin_tb_s-5"
+  >
+    <div
+      className="account-block__row"
+    >
+      <div
+        className="account-block__type"
+      >
+        To
+      </div>
+      <div
+        className="account-block__balance"
+      >
+        Balance: 
+        1137.42
+      </div>
+    </div>
+    <div
+      className="account-block__row"
+    >
+      <button
+        className="currency-label account-block__selector"
+        onClick={[MockFunction]}
+        type="button"
+      >
+        <div
+          className="currency-sign currency-label__sign"
+        >
+          £
+        </div>
+        <div
+          className="currency-label__name"
+        >
+          GBP
+        </div>
+        <img
+          alt="arrow-down"
+          className="currency-label__arrow"
+          src="test-file-stub"
+        />
+      </button>
+      <input
+        className="account-block__input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="0.00"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="account-block__row"
+    >
+      <div
+        className="account-block__rate"
+      >
+        £
+        1 = 
+        $
+        1.33
+      </div>
+      <div
+        className="account-block__result "
+      >
+        
+      </div>
+    </div>
+  </div>
+  <button
+    className="button button_primary  "
+    disabled={true}
+    onClick={[Function]}
+    type="button"
+  >
+    Specify value
+  </button>
+</div>
+`;
