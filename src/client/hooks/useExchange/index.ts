@@ -4,7 +4,7 @@ import { Account } from './types';
 import { Nullable } from '../../../types';
 import { UserAccount } from '../../components/app/types';
 import { AccountType } from '../../components/account-block/types';
-import { SetAccountsCallback } from '../../components/exchange-block/types';
+import { SetAccountsCallback } from '../../controllers/exchange-controller/types';
 import { RatesTable } from '../../utils/calculate-rates/types';
 import { MAX_INPUT_VALUE, DECIMAL_ACCURACY, RESULT_TIMEOUT_MS } from '../../constants';
 import { CurrencyName } from '../../utils/create-currency/types';

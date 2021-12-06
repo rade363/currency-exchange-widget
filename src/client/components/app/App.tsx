@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useRates from '../../hooks/useRates';
 import Loader from '../loader';
-import ExchangeBlock from '../exchange-block';
+import ExchangeController from '../../controllers/exchange-controller';
 
 import './app.scss';
 
@@ -27,7 +27,7 @@ export default function App() {
   return (
     <div className="app">
       <div className="app__container">
-        <ExchangeBlock
+        <ExchangeController
           rates={rates}
           accounts={accounts}
           setAccounts={setAccounts}

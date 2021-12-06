@@ -1,11 +1,12 @@
-import { Dispatch, SetStateAction } from 'react';
-import { RatesTable } from '../../utils/calculate-rates/types';
-import { UserAccount } from '../app/types';
-
-export type SetAccountsCallback = Dispatch<SetStateAction<UserAccount[]>>;
+import { Account } from '../../hooks/useExchange/types';
 
 export type OwnProps = {
-  rates: RatesTable;
-  accounts: UserAccount[];
-  setAccounts: SetAccountsCallback;
+  accountFrom: Account;
+  accountTo: Account;
+  handleAccountFromInputChange: (value: string) => void;
+  handleAccountToInputChange: (value: string) => void;
+  swapAccounts: () => void;
+  chooseFromAccount: () => void;
+  chooseToAccount: () => void;
+  transferMoney: (isButtonActive: boolean, isErrorPresent: boolean) => void;
 };

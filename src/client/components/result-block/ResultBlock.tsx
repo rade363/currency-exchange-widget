@@ -1,7 +1,7 @@
 import React from 'react';
 import { OwnProps } from './types';
 import Checkmark from '../checkmark';
-import Button from '../button/Button';
+import Button from '../button';
 import './result-block.scss';
 
 function ResultBlock({ result, handleButtonClick }: OwnProps) {

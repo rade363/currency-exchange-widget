@@ -1,59 +1,22 @@
 import React from 'react';
-import useExchange from '../../hooks/useExchange';
-import AccountSelector from '../account-selector';
 import AccountBlock from '../account-block';
 import SwapButton from '../swap-button';
 import Button from '../button';
-import Loader from '../loader';
-import ResultBlock from '../result-block';
 import setButtonText from '../../utils/set-button-text';
 import { OwnProps } from './types';
 import './exchange-block.scss';
 
-function ExchangeBlock({ rates, accounts, setAccounts }: OwnProps) {
+function ExchangeBlock(props: OwnProps) {
   const {
-    isSelectorOpen,
     accountFrom,
     accountTo,
-    accountToReplaceType,
     handleAccountFromInputChange,
     handleAccountToInputChange,
     swapAccounts,
     chooseFromAccount,
     chooseToAccount,
-    closeSelector,
-    changeAccount,
     transferMoney,
-    transferResult,
-    closeResult,
-  } = useExchange(rates, accounts, setAccounts);
-
-  if (!accountFrom || !accountTo) {
-    return (
-      <Loader />
-    );
-  }
-
-  if (isSelectorOpen && accountToReplaceType) {
-    return (
-      <AccountSelector
-        type={accountToReplaceType}
-        accounts={accounts}
-        closeSelector={closeSelector}
-        selectAccount={changeAccount}
-      />
-    );
-  }
-
-  if (transferResult) {
-    return (
-      <ResultBlock
-        result={transferResult}
-        handleButtonClick={closeResult}
-      />
-    );
-  }
-
+  } = props;
   const isErrorPresent = accountFrom.error !== null || accountTo.error !== null;
   const isButtonActive = Number(accountFrom.change) !== 0 && Number(accountTo.change) !== 0;
 
