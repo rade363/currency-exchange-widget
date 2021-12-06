@@ -1,10 +1,14 @@
 * {
-  &, &::before,  &::after {
+  &,
+  &::before,
+  &::after {
     box-sizing: border-box;
   }
 
-  &, &:focus, &:hover {
-    outline:none;
+  &,
+  &:focus,
+  &:hover {
+    outline: none;
   }
 }
 
@@ -45,10 +49,6 @@ a:not([class]) {
 img {
   max-width: 100%;
   display: block;
-}
-
-article > * + * {
-  margin-top: 1em;
 }
 
 input,
