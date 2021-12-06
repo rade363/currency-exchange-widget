@@ -23,7 +23,7 @@
     "url": "git+https://github.com/rade363/currency-exchange-widget.git"
   },
   "engines": {
-    "node": ">=12"
+    "node": "12.22.0"
   },
   "bugs": {
     "url": "https://github.com/rade363/currency-exchange-widget/issues"
