@@ -12,12 +12,16 @@ type EnvKeys = {
   [key: string]: string;
 };
 
-const envKeys = Object
-  .keys(env)
-  .reduce((accObj, next) => {
-    accObj[`process.env.${next}`] = JSON.stringify(env[next]);
-    return accObj;
-  }, {} as EnvKeys);
+function createKeys(envFile: DotenvParseOutput): EnvKeys {
+  return Object
+    .keys(envFile)
+    .reduce((accObj, next) => {
+      accObj[`process.env.${next}`] = JSON.stringify(env[next]);
+      return accObj;
+    }, {} as EnvKeys);
+}
+
+const envKeys = env ? createKeys(env) : {};
 
 export default {
   mode: IS_DEV ? 'development' : 'production',
@@ -62,7 +66,7 @@ export default {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin(envKeys),
+    IS_DEV && new webpack.DefinePlugin(envKeys),
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),

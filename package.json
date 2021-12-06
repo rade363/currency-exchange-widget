@@ -14,7 +14,8 @@
     "build:server": "webpack --config webpack/server.config.ts",
     "build": "npm-run-all --print-label build:*",
     "test": "jest",
-    "start": "node index.js"
+    "start": "node index.js",
+    "docker:web": "docker build --platform linux/amd64 -t rade363/currency-exchange-widget:latest -f ./Dockerfile ."
   },
   "author": "Ilya Belyavskiy",
   "license": "ISC",
