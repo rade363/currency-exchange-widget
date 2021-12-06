@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": [],
+    "target": "es5",
+    "module": "commonjs",
+
+    "sourceMap": false,
+
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": [
+    "src/server/server.ts",
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "**/*.js"
+  ]
+}

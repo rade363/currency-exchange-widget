@@ -1,0 +1,27 @@
+:root {
+  --inactive-opacity: 0.5;
+  --red-color: #e43538;
+  --red-color-rgb: 228, 53, 56;
+  --bright-blue-color: #4285f4;
+  --bright-blue-color-rgb: 66, 133, 244;
+  --black-color: #4d5167;
+  --white-color: #fff;
+  --lightest-grey-color: #f6f6f5;
+  --lightest-blue-color: #ebeff3;
+  --font-color: var(--black-color);
+  --font-error-color: var(--red-color);
+  --app-bg-color: var(--lightest-blue-color);
+  --container-grey-bg-color: var(--lightest-grey-color);
+  --currency-block-bg-color: var(--white-color);
+  --search-bg-color: var(--white-color);
+  --currency-label-bg-color: var(--lightest-grey-color);
+
+  --button-primary-inactive-bg-color: rgba(var(--bright-blue-color-rgb), var(--inactive-opacity));
+  --button-danger-inactive-bg-color: rgba(var(--red-color-rgb), var(--inactive-opacity));
+
+  --button-primary-bg-color: var(--bright-blue-color);
+  --button-danger-bg-color: var(--red-color);
+  --button-font-color: var(--white-color);
+  --button-swap-bg-color: var(--white-color);
+  --button-swap-font-hover-color: var(--bright-blue-color);
+}

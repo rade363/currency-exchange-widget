@@ -1,0 +1,61 @@
+.account-selector {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--search-bg-color);
+  border-radius: var(--wrapper-radius);
+  box-shadow: var(--base-shadow);
+}
+
+.account-selector__row {
+  display: flex;
+  flex-direction: row;
+
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.account-selector__title {
+  display: flex;
+  flex: 1;
+
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.account-selector__close-button {
+  display: flex;
+  align-items: center;
+}
+
+.account-selector__search {
+  padding: 0 2rem;
+}
+
+.account-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem 2rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--currency-label-bg-color);
+  }
+}
+
+.account-item__currency {
+  &:hover {
+    background-color: var(--currency-label-bg-color);
+  }
+}
+
+.account-item__balance {
+  flex: 1;
+
+  text-align: right;
+  font-size: 1.8rem;
+}

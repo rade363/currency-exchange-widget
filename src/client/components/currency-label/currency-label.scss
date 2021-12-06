@@ -1,0 +1,30 @@
+.currency-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 1rem 0.7rem;
+
+  border-radius: var(--base-radius);
+  border: none;
+
+  background-color: var(--currency-label-bg-color);
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-primary-inactive-bg-color);
+  }
+}
+
+.currency-label__name {
+  font-weight: 700;
+  margin: 0.2rem 0.7rem 0;
+  font-size: 1.8rem;
+  line-height: 1.4rem;
+  color: var(--font-color);
+}
+
+.currency-label__arrow {
+  min-width: 2rem;
+}

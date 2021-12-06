@@ -1,0 +1,17 @@
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--app-bg-color);
+  color: var(--font-color);
+}
+
+.app__container {
+  display: flex;
+  width: 46rem;
+  height: 55rem;
+}

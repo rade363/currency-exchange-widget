@@ -1,0 +1,23 @@
+.button {
+  padding: 1.2rem;
+
+  border-radius: var(--base-radius);
+  color: var(--button-font-color);
+  border: 0;
+
+  font-size: 1.4rem;
+
+  cursor: pointer;
+}
+
+.button_primary {
+  background-color: var(--button-primary-inactive-bg-color);
+
+  &.button_active {
+    background-color: var(--button-primary-bg-color);
+  }
+}
+
+.button_danger {
+  background-color: var(--button-danger-inactive-bg-color);
+}
