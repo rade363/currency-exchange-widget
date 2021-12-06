@@ -14,7 +14,7 @@
 * Open [http://localhost:5000](http://localhost:5000) in your web browser to access the app.
 
 ## Other
-* Run the tests by `npm run test`.
+* Run the tests by `npm run test`. Update snapshots and re-run tests with the `npm test -- -u`.
 
 ## ENV File Sample
 ```

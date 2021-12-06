@@ -11,6 +11,9 @@ module.exports = {
   globals: {
     window: {},
   },
+  setupFilesAfterEnv: [
+    "@testing-library/jest-dom/extend-expect"
+  ],
   coverageReporters: [["json"], ["lcov"]]
 };
 
