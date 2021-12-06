@@ -8,6 +8,7 @@ function Button({ children, active, styleType, className, ...otherProps }: OwnPr
       {...otherProps}
       type="button"
       className={`button button_${styleType} ${active ? 'button_active' : ''} ${className || ''}`}
+      disabled={!active}
     >
       {children}
     </button>
