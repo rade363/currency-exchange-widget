@@ -167,7 +167,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     setAccountToReplaceType(null);
   };
 
-  const changeAccount = useCallback((newAccountName: CurrencyName) => {
+  const changeAccount = useCallback((newAccountName: CurrencyName) => () => {
     const accountToReplace = accountToReplaceType === 'From' ? accountFrom : accountTo;
     const otherAccount = accountToReplaceType === 'From' ? accountTo : accountFrom;
     if (!accountToReplace || !otherAccount) {
