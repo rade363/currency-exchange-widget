@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
 import axios from 'axios';
-import useRates from './index';
-import { ExchangeRates } from '../../api/exchange-rates-api/types';
-import { RatesTable } from '../../utils/calculate-rates/types';
+import useRates from '../index';
+import { ExchangeRates } from '../../../api/exchange-rates-api/types';
+import { RatesTable } from '../../../utils/calculate-rates/types';
 
 jest.mock('axios');
 

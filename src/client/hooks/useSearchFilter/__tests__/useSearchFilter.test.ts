@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { ChangeEvent } from 'react';
-import useSearchFilter from './index';
-import { UserAccount } from '../../components/app/types';
-import { SelectableAccount } from '../../utils/create-account-selector-option/types';
+import useSearchFilter from '../index';
+import { UserAccount } from '../../../components/app/types';
+import { SelectableAccount } from '../../../utils/create-account-selector-option/types';
 
 const sampleUserAccounts: UserAccount[] = [
   {

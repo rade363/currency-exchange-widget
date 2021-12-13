@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import useExchange from './index';
-import { RatesTable } from '../../utils/calculate-rates/types';
-import { UserAccount } from '../../components/app/types';
-import { Account } from './types';
+import useExchange from '../index';
+import { RatesTable } from '../../../utils/calculate-rates/types';
+import { UserAccount } from '../../../components/app/types';
+import { Account } from '../types';
 
 const sampleRatesTable: RatesTable = {
   usdToGbp: 0.753425,
@@ -273,7 +273,7 @@ describe('useExchange hook', () => {
       expect(result.current.isSelectorOpen).toBe(true);
 
       act(() => {
-        result.current.changeAccount('GBP');
+        result.current.changeAccount('GBP')();
       });
 
       expect(result.current.isSelectorOpen).toBe(false);
@@ -285,7 +285,7 @@ describe('useExchange hook', () => {
       expect(result.current.isSelectorOpen).toBe(true);
 
       act(() => {
-        result.current.changeAccount('EUR');
+        result.current.changeAccount('EUR')();
       });
 
       expect(result.current.isSelectorOpen).toBe(false);
@@ -300,7 +300,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('USD');
+      result.current.changeAccount('USD')();
     });
 
     const [firstAccount, secondAccount] = sampleUserAccounts;
@@ -335,7 +335,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('EUR');
+      result.current.changeAccount('EUR')();
     });
 
     expect(result.current.accountFrom).toMatchObject(expectedFromAccount);
@@ -350,7 +350,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('EUR');
+      result.current.changeAccount('EUR')();
     });
 
     const [firstAccount, secondAccount] = sampleUserAccounts;
@@ -389,7 +389,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('USD');
+      result.current.changeAccount('USD')();
     });
 
     const [firstAccount, secondAccount] = sampleUserAccounts;
@@ -428,7 +428,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('GBP');
+      result.current.changeAccount('GBP')();
     });
 
     const expectedFromAccount: Account = {
@@ -466,7 +466,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('GBP');
+      result.current.changeAccount('GBP')();
     });
 
     const expectedFromAccount: Account = {
@@ -535,7 +535,7 @@ describe('useExchange hook', () => {
     });
 
     act(() => {
-      result.current.changeAccount('GBP');
+      result.current.changeAccount('GBP')();
     });
 
     const expectedFromAccount: Account = {
