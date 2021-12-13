@@ -34,7 +34,7 @@ function AccountSelector({ type, accounts, closeSelector, selectAccount }: OwnPr
           >
             <div
               className="account-item"
-              onClick={() => selectAccount(account.currency.name)}
+              onClick={selectAccount(account.currency.name)}
             >
               <CurrencyLabel
                 className="account-item__currency"

@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Block should render the account block with error in case of invalid input value 1`] = `
+<div
+  className="account-block margin_tb_s-5"
+>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__type"
+    >
+      From
+    </div>
+    <div
+      className="account-block__balance"
+    >
+      Balance: 
+      1137.42
+    </div>
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <button
+      className="currency-label account-block__selector"
+      onClick={[MockFunction]}
+      type="button"
+    >
+      <div
+        className="currency-sign currency-label__sign"
+      >
+        $
+      </div>
+      <div
+        className="currency-label__name"
+      >
+        USD
+      </div>
+      <img
+        alt="arrow-down"
+        className="currency-label__arrow"
+        src="test-file-stub"
+      />
+    </button>
+    <input
+      className="account-block__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="0.00"
+      type="text"
+      value="2000"
+    />
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__rate"
+    >
+      $
+      1 = 
+      €
+      0.89
+    </div>
+    <div
+      className="account-block__result account-block__result_error"
+    >
+      Insufficient funds: -862.58
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Account Block should render the account block with maximum input value error 1`] = `
+<div
+  className="account-block margin_tb_s-5"
+>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__type"
+    >
+      From
+    </div>
+    <div
+      className="account-block__balance"
+    >
+      Balance: 
+      1137.42
+    </div>
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <button
+      className="currency-label account-block__selector"
+      onClick={[MockFunction]}
+      type="button"
+    >
+      <div
+        className="currency-sign currency-label__sign"
+      >
+        $
+      </div>
+      <div
+        className="currency-label__name"
+      >
+        USD
+      </div>
+      <img
+        alt="arrow-down"
+        className="currency-label__arrow"
+        src="test-file-stub"
+      />
+    </button>
+    <input
+      className="account-block__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="0.00"
+      type="text"
+      value="100000000"
+    />
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__rate"
+    >
+      $
+      1 = 
+      €
+      0.89
+    </div>
+    <div
+      className="account-block__result account-block__result_error"
+    >
+      Max value: 8 digits
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Account Block should render the account block with result in case of valid input value 1`] = `
+<div
+  className="account-block margin_tb_s-5"
+>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__type"
+    >
+      From
+    </div>
+    <div
+      className="account-block__balance"
+    >
+      Balance: 
+      1137.42
+    </div>
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <button
+      className="currency-label account-block__selector"
+      onClick={[MockFunction]}
+      type="button"
+    >
+      <div
+        className="currency-sign currency-label__sign"
+      >
+        $
+      </div>
+      <div
+        className="currency-label__name"
+      >
+        USD
+      </div>
+      <img
+        alt="arrow-down"
+        className="currency-label__arrow"
+        src="test-file-stub"
+      />
+    </button>
+    <input
+      className="account-block__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="0.00"
+      type="text"
+      value="200"
+    />
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__rate"
+    >
+      $
+      1 = 
+      €
+      0.89
+    </div>
+    <div
+      className="account-block__result "
+    >
+      Result: 937.42
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Account Block should render the account block without input value, result and error 1`] = `
+<div
+  className="account-block margin_tb_s-5"
+>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__type"
+    >
+      From
+    </div>
+    <div
+      className="account-block__balance"
+    >
+      Balance: 
+      1137.42
+    </div>
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <button
+      className="currency-label account-block__selector"
+      onClick={[MockFunction]}
+      type="button"
+    >
+      <div
+        className="currency-sign currency-label__sign"
+      >
+        $
+      </div>
+      <div
+        className="currency-label__name"
+      >
+        USD
+      </div>
+      <img
+        alt="arrow-down"
+        className="currency-label__arrow"
+        src="test-file-stub"
+      />
+    </button>
+    <input
+      className="account-block__input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="0.00"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="account-block__row"
+  >
+    <div
+      className="account-block__rate"
+    >
+      $
+      1 = 
+      €
+      0.89
+    </div>
+    <div
+      className="account-block__result "
+    >
+      
+    </div>
+  </div>
+</div>
+`;

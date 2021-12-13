@@ -6,5 +6,5 @@ export type OwnProps = {
   type: AccountType;
   accounts: UserAccount[];
   closeSelector: () => void;
-  selectAccount: (name: CurrencyName) => void;
+  selectAccount: (name: CurrencyName) => () => void;
 };

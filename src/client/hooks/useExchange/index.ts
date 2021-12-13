@@ -1,27 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import createCurrency from '../../utils/create-currency';
+import validateValue from '../../utils/validate-value';
 import { Account } from './types';
 import { Nullable } from '../../../types';
 import { UserAccount } from '../../components/app/types';
 import { AccountType } from '../../components/account-block/types';
 import { SetAccountsCallback } from '../../controllers/exchange-controller/types';
 import { RatesTable } from '../../utils/calculate-rates/types';
-import { MAX_INPUT_VALUE, DECIMAL_ACCURACY, RESULT_TIMEOUT_MS } from '../../constants';
+import { DECIMAL_ACCURACY, RESULT_TIMEOUT_MS } from '../../constants';
 import { CurrencyName } from '../../utils/create-currency/types';
-
-function validateValue(value: string, balance: number): Nullable<string> {
-  if (Number(value) > Number(MAX_INPUT_VALUE)) {
-    return `Max value: ${MAX_INPUT_VALUE.length} digits`;
-  }
-
-  const remaining = balance - Number(value);
-
-  if (remaining < 0) {
-    return `Insufficient funds: ${remaining.toFixed(DECIMAL_ACCURACY)}`;
-  }
-
-  return null;
-}
 
 const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: SetAccountsCallback) => {
   const [isSelectorOpen, setIsSelectorOpen] = useState<boolean>(false);
@@ -69,17 +56,17 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
   }, [rates, accounts]);
 
   const handleAccountFromInputChange = (value: string) => {
+    const numberValue = Number(value);
+
     setAccountFrom(prevAccountFrom => {
       if (!prevAccountFrom) {
         return null;
       }
 
-      const newValue = Number(value);
-
       return {
         ...prevAccountFrom,
         change: value,
-        result: newValue === 0 ? null : (prevAccountFrom.balance - newValue).toFixed(DECIMAL_ACCURACY),
+        result: numberValue === 0 ? null : (prevAccountFrom.balance - numberValue).toFixed(DECIMAL_ACCURACY),
         error: validateValue(value, prevAccountFrom.balance),
       };
     });
@@ -89,29 +76,28 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
         return null;
       }
 
-      const newValue = Number(value);
-      const change = (newValue * accountFrom.currency.rate).toFixed(DECIMAL_ACCURACY);
+      const change = (numberValue * accountFrom.currency.rate).toFixed(DECIMAL_ACCURACY);
 
       return {
         ...prevAccountTo,
         change,
-        result: newValue === 0 ? null : (prevAccountTo.balance + Number(change)).toFixed(DECIMAL_ACCURACY),
+        result: numberValue === 0 ? null : (prevAccountTo.balance + Number(change)).toFixed(DECIMAL_ACCURACY),
       };
     });
   };
 
   const handleAccountToInputChange = (value: string) => {
+    const numberValue = Number(value);
+
     setAccountTo(prevAccountTo => {
       if (!prevAccountTo) {
         return null;
       }
 
-      const newValue = Number(value);
-
       return {
         ...prevAccountTo,
         change: value,
-        result: newValue === 0 ? null : (prevAccountTo.balance + newValue).toFixed(DECIMAL_ACCURACY),
+        result: numberValue === 0 ? null : (prevAccountTo.balance + numberValue).toFixed(DECIMAL_ACCURACY),
       };
     });
 
@@ -120,13 +106,12 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
         return null;
       }
 
-      const newValue = Number(value);
-      const change = (newValue * accountTo.currency.rate).toFixed(DECIMAL_ACCURACY);
+      const change = (numberValue * accountTo.currency.rate).toFixed(DECIMAL_ACCURACY);
 
       return {
         ...prevAccountFrom,
         change,
-        result: newValue === 0 ? null : (prevAccountFrom.balance - Number(change)).toFixed(DECIMAL_ACCURACY),
+        result: numberValue === 0 ? null : (prevAccountFrom.balance - Number(change)).toFixed(DECIMAL_ACCURACY),
         error: validateValue(change, prevAccountFrom.balance),
       };
     });
@@ -167,7 +152,7 @@ const useExchange = (rates: RatesTable, accounts: UserAccount[], setAccounts: Se
     setAccountToReplaceType(null);
   };
 
-  const changeAccount = useCallback((newAccountName: CurrencyName) => {
+  const changeAccount = useCallback((newAccountName: CurrencyName) => () => {
     const accountToReplace = accountToReplaceType === 'From' ? accountFrom : accountTo;
     const otherAccount = accountToReplaceType === 'From' ? accountTo : accountFrom;
     if (!accountToReplace || !otherAccount) {
